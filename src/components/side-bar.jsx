@@ -43,7 +43,7 @@ export default function SideBar() {
                 </ul>
             </div>
 
-            <div className="md:hidden fixed right-0 left-0 top-0 border w-screen flex items-center justify-between">
+            <div className="md:hidden bg-slate-50 fixed right-0 left-0 top-0 border-b w-screen flex items-center justify-between">
                 <Image src={InstagramLogo} alt="Instagram Homepage" width={120} className="pt-5 px-3 pb-4" />
 
                 <div className="flex justify-end px-4">
@@ -60,7 +60,7 @@ export default function SideBar() {
 
             <div className="h-px bg-slate-50 w-screen"></div>
 
-            <div className="md:hidden fixed bottom-0 left-0 right-0 border w-screen">
+            <div className="md:hidden bg-slate-50 fixed bottom-0 left-0 right-0 border-t w-screen">
 
                 <ul className="list-none flex justify-around">
                     {OptionContainer.map((index) => {
