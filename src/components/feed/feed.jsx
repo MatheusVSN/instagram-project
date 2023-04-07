@@ -9,7 +9,7 @@ import SendIcon from "../../images/send-icon.svg"
 export default function Feed({ User, PostInformation }) {
     return (
         <div className="max-w-[570px]">
-            <div className="flex items-center gap-4 bg-slate-50 p-2 w-full">
+            <div className="flex items-center gap-4 p-2 w-full">
                 <div class="p-0.5 bg-gradient-to-tr from-amber-500 to-fuchsia-700 rounded-full">
                     <div class="p-2 bg-white rounded-full">
                         <Image src={User.ImageSource} alt={User.Name} width={20} height={20} />
@@ -22,14 +22,16 @@ export default function Feed({ User, PostInformation }) {
 
             <Image src={PostInformation.ImageSource} />
 
-            <div className="flex items-center gap-4 bg-slate-50 p-2 w-full">
-                <ul className="list-none inline-flex">
-                    <ul><Image src={HeartIcon} alt="Gostar" /></ul>
-                    <ul><Image src={MessageIcon} alt="Comentar" /></ul>
-                    <ul><Image src={SendIcon} alt="Compartilhar" /></ul>
-                    <ul className="float-right"><Image src={Bookmark} alt="Bookmark" /></ul>
-                </ul>
+            <div className="flex items-center gap-4 p-2 w-full mb-1.5">
+                <Image src={HeartIcon} alt="Gostar" />
+                <Image src={MessageIcon} alt="Comentar" />
+                <Image src={SendIcon} alt="Compartilhar" />
+                <Image className="ml-auto" src={Bookmark} alt="Bookmark" />
             </div>
+
+            <p className="font-semibold text-sm pl-2">9999 curtidas</p>
+            <p className="text-sm pl-2"><b className="font-semibold">{User.Name} </b>{PostInformation.Description}</p>
+            <input className="w-full p-4 border-b placeholder:text-xs outline-none" placeholder="Adicione um comentário.."></input>
         </div>
     )
 }

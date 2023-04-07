@@ -2,7 +2,7 @@ import imageExample from "../images/feed-images/image-example.jpg";
 import userIcon from "../images/user-icon.svg";
 
 import Feed from "../components/feed/feed";
-import UserProfile from "../components/user/user-profile";
+import UserProfile from "./user/user-profile";
 
 function getRandomNumberBetween(Min, Max) {
     return Math.floor(Math.random() * (Max - Min + 1) + Min)
@@ -18,8 +18,8 @@ function getRandomNumber() {
 class PostObject {
     constructor(imageSource, description) {
         this.ImageSource = ImageSource || imageExample,
-        this.Description = description,
-        this.Likes = getRandomNumber()
+            this.Description = description,
+            this.Likes = getRandomNumber()
     }
 }
 
@@ -41,7 +41,7 @@ export default function Activity() {
                 <ul className="list-none flex space-x-6">
                     {ListOfUsers.map((index) => {
                         return (<li>
-                            <UserProfile Name={index.name} ImageSource={index.image} />
+                            <UserProfile key={index} Name={index.name} ImageSource={index.image} />
                         </li>)
                     })}
                 </ul>
@@ -52,7 +52,7 @@ export default function Activity() {
                 <ul className="list-none space-y-6">
                     {ListOfUsers.map((index) => {
                         return (<li>
-                            <Feed User={{ Name: index.name, ImageSource: index.image}} PostInformation={{ Description: "Descrição", ImageSource: imageExample }} />
+                            <Feed key={index} User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: "Descrição", ImageSource: imageExample }} />
                         </li>)
                     })}
                 </ul>

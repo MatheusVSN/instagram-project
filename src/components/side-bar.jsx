@@ -13,6 +13,7 @@ import SearchIcon from "../images/search-icon.svg"
 import UserIcon from "../images/user-icon.svg"
 
 import SideBarOption from "../components/side-bar/option.jsx"
+import UserProfileStyle2 from "../components/user/user-profile-2.jsx"
 
 export default function SideBar() {
     const OptionContainer = [
@@ -30,19 +31,21 @@ export default function SideBar() {
 
     return (
         <>
-            <div className="pb-5 pt-2 px-3 w-60 h-screen border-r max-xl:w-20 max-md:hidden fixed flex flex-wrap justify-start content-start">
+            {/* Main side bar */}
+            <div className="pb-5 pt-2 px-3 w-60  h-full border-r max-xl:w-20 max-md:hidden fixed flex flex-wrap justify-start content-start">
                 <Image src={InstagramLogo} alt="Instagram Homepage" width={140} className="pt-5 px-3 pb-4 max-xl:hidden" />
-                <ul className="list-none w-full">
+                <ul className="list-none w-full ">
                     {OptionContainer.map((index) => {
                         return (
-                            <li>
-                                <SideBarOption imageSource={index.logo} name={index.name} isActive={index.active} isBottom={index.bottom} isMobile={index.isMobile} />
+                            <li className={`${index.bottom === true && "absolute bottom-0"}`}>
+                                <SideBarOption imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
                             </li>
                         )
                     })}
                 </ul>
             </div>
 
+            {/* Top mobile navigation bar(logo/search-bar) */}
             <div className="md:hidden bg-slate-50 fixed right-0 left-0 top-0 border-b w-screen flex items-center justify-between">
                 <Image src={InstagramLogo} alt="Instagram Homepage" width={120} className="pt-5 px-3 pb-4" />
 
@@ -60,6 +63,7 @@ export default function SideBar() {
 
             <div className="h-px bg-slate-50 w-screen"></div>
 
+            {/* Bottom mobile navigation bar */}
             <div className="md:hidden bg-slate-50 fixed bottom-0 left-0 right-0 border-t w-screen">
 
                 <ul className="list-none flex justify-around">
@@ -73,6 +77,11 @@ export default function SideBar() {
                         )
                     })}
                 </ul>
+            </div>
+
+            {/* Top right side bar */}
+            <div className="max-xl:hidden fixed right-0">
+                <UserProfileStyle2 ImageSource={UserIcon} Name="Usuário" FullName="Usuario Lorem Ipsum" />
             </div>
         </>
     )
