@@ -10,7 +10,7 @@ export default function Main() {
         <title>Instagram</title>
       </Head>
       <SideBar />
-      <main class="max-md:mt-16 sm:grid sm:place-content-center">
+      <main className="max-md:mt-16 sm:grid sm:place-content-center">
         <Activity />
       </main>
     </>

@@ -40,8 +40,8 @@ export default function Activity() {
             <div className="mt-4 py-4 ml-1 overflow-auto overflow-y-hidden scrollbar-hide min-md:max-w-[571px]">
                 <ul className="list-none flex space-x-6">
                     {ListOfUsers.map((index) => {
-                        return (<li>
-                            <UserProfile key={index} Name={index.name} ImageSource={index.image} />
+                        return (<li key={index}>
+                            <UserProfile Name={index.name} ImageSource={index.image} />
                         </li>)
                     })}
                 </ul>
@@ -51,8 +51,8 @@ export default function Activity() {
                 <h2 className="font-bold text-2xl mb-4">Feeds</h2>
                 <ul className="list-none space-y-6">
                     {ListOfUsers.map((index) => {
-                        return (<li>
-                            <Feed key={index} User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: "Descrição", ImageSource: imageExample }} />
+                        return (<li key={index}>
+                            <Feed User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: "Descrição", ImageSource: imageExample }} />
                         </li>)
                     })}
                 </ul>

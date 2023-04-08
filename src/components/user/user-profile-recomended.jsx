@@ -3,8 +3,8 @@ import Image from "next/image"
 export default function UserProfile({ ImageSource, Name, Reason }) {
     return (
         <div className="flex items-center mt-2">
-            <div class="p-0.5 bg-gray-100 rounded-full w-[46px]">
-                <div class="p-2 bg-white rounded-full">
+            <div className="p-0.5 bg-gray-100 rounded-full w-[46px]">
+                <div className="p-2 bg-white rounded-full">
                     <Image src={ImageSource} alt={Name} width={32} height={32} />
                 </div>
             </div>

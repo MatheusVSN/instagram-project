@@ -10,8 +10,8 @@ export default function Feed({ User, PostInformation }) {
     return (
         <div className="max-w-[570px] p-4 grid place-content-center">
             <div className="flex items-center gap-4 p-2 w-full">
-                <div class="p-0.5 bg-gradient-to-tr from-amber-500 to-fuchsia-700 rounded-full">
-                    <div class="p-2 bg-white rounded-full">
+                <div className="p-0.5 bg-gradient-to-tr from-amber-500 to-fuchsia-700 rounded-full">
+                    <div className="p-2 bg-white rounded-full">
                         <Image src={User.ImageSource} alt={User.Name} width={20} height={20} />
                     </div>
                 </div>

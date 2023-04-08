@@ -26,8 +26,8 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
     return (
         <div className="mr-6">
             <div className="flex items-center mt-8 mb-3">
-                <div class="p-0.5 bg-gray-100 rounded-full w-[56px]">
-                    <div class="p-2 bg-white rounded-full">
+                <div className="p-0.5 bg-gray-100 rounded-full w-[56px]">
+                    <div className="p-2 bg-white rounded-full">
                         <Image src={ImageSource} alt={Name} width={45} height={45} />
                     </div>
                 </div>
@@ -49,7 +49,7 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
 
             <ul className="list-none mb-3">
                 {RecommendationUsers.map((index) => {
-                    return (<li>
+                    return (<li key={index}>
                         <UserRecomendationComponent ImageSource={index.image} Name={index.name} Reason={index.reason} />
                     </li>)
                 })}
@@ -57,7 +57,7 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
 
             <ul className="list-disc max-w-[280px] mb-3">
                 {Options.map((index) => {
-                    return (<li className="inline-flex items-center align-baseline before:content-['\00B7'] before:mx-1">
+                    return (<li key={index} className="inline-flex items-center align-baseline before:content-['\00B7'] before:mx-1">
                         <MiniButton Name={index} />
                     </li>)
                 })}

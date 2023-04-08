@@ -37,8 +37,8 @@ export default function SideBar() {
                 <ul className="list-none w-full ">
                     {OptionContainer.map((index) => {
                         return (
-                            <li className={`${index.bottom === true && "absolute bottom-0"}`}>
-                                <SideBarOption imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
+                            <li key={index} className={`${index.bottom === true && "absolute bottom-0"}`}>
+                                <SideBarOption key={index} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
                             </li>
                         )
                     })}
@@ -71,8 +71,8 @@ export default function SideBar() {
                         if (!index.renderOnMobile) return
 
                         return (
-                            <li>
-                                <SideBarOption imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
+                            <li key={index}>
+                                <SideBarOption key={index} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
                             </li>
                         )
                     })}
