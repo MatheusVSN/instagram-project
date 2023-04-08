@@ -8,7 +8,7 @@ import SendIcon from "../../images/send-icon.svg"
 
 export default function Feed({ User, PostInformation }) {
     return (
-        <div className="max-w-[570px]">
+        <div className="max-w-[570px] p-4">
             <div className="flex items-center gap-4 p-2 w-full">
                 <div class="p-0.5 bg-gradient-to-tr from-amber-500 to-fuchsia-700 rounded-full">
                     <div class="p-2 bg-white rounded-full">

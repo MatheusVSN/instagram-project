@@ -36,8 +36,8 @@ export default function Activity() {
 
 
     return (
-        <div className="mb-4">
-            <div className="mt-4 py-4 ml-1 overflow-auto overflow-y-hidden scrollbar-hide max-w-[571px]">
+        <div className="mb-4 grid justify-items-center">
+            <div className="mt-4 py-4 ml-1 overflow-auto overflow-y-hidden scrollbar-hide min-md:max-w-[571px]">
                 <ul className="list-none flex space-x-6">
                     {ListOfUsers.map((index) => {
                         return (<li>
