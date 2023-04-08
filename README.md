@@ -1,7 +1,7 @@
 # Instagram clone Project
 
 ### Resources used:
-- Icons:
+- Icons/Favicon:
   - https://icons8.com.br/
   - https://feathericons.com/
 
