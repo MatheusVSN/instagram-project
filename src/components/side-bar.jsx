@@ -37,7 +37,7 @@ export default function SideBar() {
                 <ul className="list-none w-full ">
                     {OptionContainer.map((index) => {
                         return (
-                            <li key={index} className={`${index.bottom === true && "absolute bottom-0"}`}>
+                            <li key={index} className={index.bottom === true && "mt-auto"}>
                                 <SideBarOption key={index} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
                             </li>
                         )
