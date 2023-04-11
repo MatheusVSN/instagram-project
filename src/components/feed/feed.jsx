@@ -17,16 +17,16 @@ export default function Feed({ User, PostInformation }) {
                 </div>
 
                 <p className="font-bold">{User.Name}</p>
-                <Image className="rounded-full hover:bg-slate-200 hover:cursor-pointer transition ml-auto" src={MoreIcon} alt={"Mais opções"} />
+                <Image className="rounded-full hover:cursor-pointer transition ml-auto hover:scale-150" src={MoreIcon} alt={"Mais opções"} />
             </div>
 
             <Image src={PostInformation.ImageSource} width={1280} height={720} />
 
             <div className="flex items-center gap-4 p-2 w-full mb-1.5 transition hover:cursor-pointer">
-                <Image src={HeartIcon} alt="Gostar" />
-                <Image src={MessageIcon} alt="Comentar" />
-                <Image src={SendIcon} alt="Compartilhar" />
-                <Image className="ml-auto" src={Bookmark} alt="Bookmark" />
+                <Image className="transition hover:scale-150" src={HeartIcon} alt="Gostar" />
+                <Image className="transition hover:scale-150" src={MessageIcon} alt="Comentar" />
+                <Image className="transition hover:scale-150" src={SendIcon} alt="Compartilhar" />
+                <Image className="transition hover:scale-150 ml-auto" src={Bookmark} alt="Bookmark" />
             </div>
 
             <p className="font-semibold text-sm pl-2">{PostInformation.Likes} curtidas</p>
