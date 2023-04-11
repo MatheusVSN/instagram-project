@@ -22,11 +22,11 @@ export default function Feed({ User, PostInformation }) {
 
             <Image src={PostInformation.ImageSource} width={1280} height={720} />
 
-            <div className="flex items-center gap-4 p-2 w-full mb-1.5">
-                <Image src={HeartIcon} alt="Gostar" />
-                <Image src={MessageIcon} alt="Comentar" />
-                <Image src={SendIcon} alt="Compartilhar" />
-                <Image className="ml-auto" src={Bookmark} alt="Bookmark" />
+            <div className="flex items-center gap-4 p-2 w-full mb-1.5 transition hover:cursor-pointer">
+                <Image className="hover:bg-slate-200 rounded-full" src={HeartIcon} alt="Gostar" />
+                <Image className="hover:bg-slate-200 rounded-full" src={MessageIcon} alt="Comentar" />
+                <Image className="hover:bg-slate-200 rounded-full" src={SendIcon} alt="Compartilhar" />
+                <Image className="hover:bg-slate-200 rounded-full ml-auto" src={Bookmark} alt="Bookmark" />
             </div>
 
             <p className="font-semibold text-sm pl-2">{PostInformation.Likes} curtidas</p>
