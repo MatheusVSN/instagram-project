@@ -34,6 +34,9 @@ export default function Activity() {
             })
             .then((data) => {
                 abortController.abort();
+                setUserList(() => {
+                    return []
+                })
                 for (let index = 0; index < data.results.length; index += 1) {
                     let userData = data.results[index];
                     let user = { name: userData.name.first, image: userData.picture.large };
