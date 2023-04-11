@@ -45,7 +45,9 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
                     let userData = data.results[index];
                     let randomIndex = getRandomNumberBetween(0, 3);
                     let Reason = ReasonsList[randomIndex]
-                    let user = { name: userData.name.first, image: userData.picture.thumbnail, reason: Reason };
+                    if (randomIndex == 1) {
+                    }
+                    let user = { name: userData.name.first, image: userData.picture.large, reason: Reason };
                     setRecommendation((prev) => {
                         return [...prev, user]
                     })

@@ -46,7 +46,7 @@ export default function SideBar() {
             </div>
 
             {/* Top mobile navigation bar(logo/search-bar) */}
-            <div className="md:hidden bg-slate-50 fixed right-0 left-0 top-0 border-b flex items-center justify-between">
+            <div className="md:hidden bg-slate-50 fixed right-0 left-0 top-0 border-b flex items-center justify-between max-[375px]:flex max-[375px]:flex-col">
                 <Image src={InstagramLogo} alt="Instagram Homepage" width={120} className="pt-5 px-3 pb-4" />
 
                 <div className="flex justify-end px-4">
