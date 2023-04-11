@@ -4,8 +4,8 @@ export default function UserProfile({ ImageSource, Name, Reason }) {
     return (
         <div className="flex items-center mt-2">
             <div className="p-0.5 bg-gray-100 rounded-full w-[46px]">
-                <div className="p-2 bg-white rounded-full">
-                    <Image src={ImageSource} alt={Name} width={32} height={32} />
+                <div className="p-1 bg-white rounded-full">
+                    <Image className="rounded-full" src={ImageSource} alt={Name} width={32} height={32} />
                 </div>
             </div>
 

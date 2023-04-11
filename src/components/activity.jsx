@@ -1,8 +1,13 @@
-import imageExample from "../images/feed-images/image-example.jpg";
-import userIcon from "../images/user-icon.svg";
+import { faker } from '@faker-js/faker';
+import { useEffect, useState } from "react";
 
 import Feed from "../components/feed/feed";
+import imageExample from "../images/feed-images/image-example.jpg";
+
 import UserProfile from "./user/user-profile";
+
+const abortController = new AbortController()
+const fetcher = (url) => fetch(url).then((response) => response.json());
 
 function getRandomNumberBetween(Min, Max) {
     return Math.floor(Math.random() * (Max - Min + 1) + Min)
@@ -16,24 +21,85 @@ function getRandomNumber() {
 }
 
 class PostObject {
-    constructor(imageSource, description) {
-        this.ImageSource = ImageSource || imageExample,
+    constructor(user, imageSource, description) {
+        this.User = user
+        this.ImageSource = imageSource || imageExample,
             this.Description = description,
             this.Likes = getRandomNumber()
     }
 }
 
-export default function Activity() {
-    const ListOfUsers = [
-        { name: "User_1", image: userIcon },
-        { name: "User_2", image: userIcon },
-        { name: "User_3", image: userIcon },
-        { name: "User_4", image: userIcon },
-        { name: "User_5", image: userIcon },
-        { name: "User_6", image: userIcon },
-        { name: "User_7", image: userIcon },
-    ]
+class Person {
+    constructor(name, profilePicture) {
+        this.Name = name,
+            this.Image = profilePicture
+    }
+}
 
+export default function Activity() {
+    const [ListOfUsers, setUserList] = useState([]);
+    const [ListOfPosts, setPostList] = useState([]);
+    const [Quantity, setQuantity] = useState(0)
+
+    useEffect(() => {
+        fetch("/api/user-generator", {
+            signal: abortController.signal,
+            method: "POST",
+            body: JSON.stringify({ ammount: 7, gettingFollowers: true })
+        })
+            .then((response) => {
+                if (response.status == 200) {
+                    return response.json()
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then((data) => {
+                abortController.abort();
+                for (let index = 0; index < data.results.length; index += 1) {
+                    let userData = data.results[index];
+                    let user = { name: userData.name.first, image: userData.picture.thumbnail };
+                    setUserList((prev) => {
+                        return [...prev, user]
+                    })
+                }
+            })
+    }, [])
+
+    async function fetchImages() {
+        try {
+            const abortPost = new AbortController()
+            const response = await fetch("/api/image-generator", { signal: abortPost.signal })
+            if (response.status == 200) {
+                const data = await response.json()
+                abortPost.abort()
+                return data
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        } catch (errorReason) {
+            return { id: "FAILED", advice: errorReason };
+        }
+    }
+
+    function InitialPostSetup() {
+        fetchImages().then((data) => {
+            setQuantity((prev) => {
+                return prev + 1
+            })
+            let User = ListOfUsers[getRandomNumberBetween(0, ListOfUsers.length)]
+            if (!User) return
+            let NewPost = new PostObject(User, data.url, faker.lorem.lines())
+            setPostList((previousItems) => {
+                return [...previousItems, NewPost]
+            })
+        })
+    }
+
+
+    if (Quantity <= 8) {
+        InitialPostSetup()
+    }
 
     return (
         <div className="mb-4 grid place-content-center">
@@ -50,11 +116,19 @@ export default function Activity() {
             <div className="mt-4">
                 <h2 className="font-bold text-2xl mb-4">Feeds</h2>
                 <ul className="list-none space-y-6">
+                    {ListOfPosts.map((index) => {
+                        return <li key={index}>
+                            <Feed User={{ Name: index.User.name, ImageSource: index.User.image }} PostInformation={{ Description: index.Description, ImageSource: index.ImageSource, Likes: index.Likes }} />
+                        </li>
+                    })}
+
+                    {/* 
                     {ListOfUsers.map((index) => {
                         return (<li key={index}>
-                            <Feed User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: "Descrição", ImageSource: imageExample }} />
+                            <Feed User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: "Descrição", ImageSource: imageExample, Likes: getRandomNumber() }} />
                         </li>)
                     })}
+                    */}
                 </ul>
             </div>
 

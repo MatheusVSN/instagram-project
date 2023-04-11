@@ -34,7 +34,7 @@ export default function SideBar() {
             {/* Main side bar */}
             <div className="pb-5 pt-2 px-3 w-60  h-full border-r max-xl:w-20 max-md:hidden fixed flex flex-wrap justify-start content-start">
                 <Image src={InstagramLogo} alt="Instagram Homepage" width={140} className="pt-5 px-3 pb-4 max-xl:hidden" />
-                <ul className="list-none w-full ">
+                <ul className="list-none w-full">
                     {OptionContainer.map((index) => {
                         return (
                             <li key={index} className={index.bottom === true && "mt-auto"}>

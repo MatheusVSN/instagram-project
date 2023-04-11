@@ -1,7 +1,12 @@
-import Image from "next/image"
-import UserRecomendationComponent from "../user/user-profile-recomended.jsx"
+import { useEffect, useState } from "react";
 
-import userIcon from "../../images/user-icon.svg"
+import Image from "next/image";
+import UserRecomendationComponent from "../user/user-profile-recomended.jsx";
+
+
+const abortController = new AbortController()
+const abortFollowers = new AbortController()
+const abortRecommendation = new AbortController()
 
 function MiniButton({ Name }) {
     return (
@@ -9,14 +14,46 @@ function MiniButton({ Name }) {
     )
 }
 
+function getRandomNumberBetween(Min, Max) {
+    return Math.floor(Math.random() * (Max - Min + 1) + Min)
+}
+
+const ReasonsList = [
+    "Novo(a) no Instagram", "Seguido(a) por %n e %n", "Sugestões para você", "Segue você"
+]
+
 export default function UserProfile({ ImageSource, Name, FullName }) {
-    const RecommendationUsers = [
-        { name: "User_9", image: userIcon, reason: "Novo no Instagram" },
-        { name: "User_10", image: userIcon, reason: "Seguido(a) por user_1 e user_2" },
-        { name: "User_11", image: userIcon, reason: "Sugestões para você" },
-        { name: "User_12", image: userIcon, reason: "Segue você" },
-        { name: "User_13", image: userIcon, reason: "Novo no Instagram" },
-    ]
+    const [RecommendationUsers, setRecommendation] = useState([])
+
+
+    useEffect(() => {
+        fetch("/api/user-generator", {
+            signal: abortController.signal,
+            method: "POST",
+            body: JSON.stringify({ ammount: 5 })
+        })
+            .then((response) => {
+                if (response.status == 200) {
+                    return response.json()
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .then((data) => {
+                abortController.abort();
+                for (let index = 0; index < data.results.length; index += 1) {
+                    let userData = data.results[index];
+                    let randomIndex = getRandomNumberBetween(0, 3);
+                    let Reason = ReasonsList[randomIndex]
+                    let user = { name: userData.name.first, image: userData.picture.thumbnail, reason: Reason };
+                    setRecommendation((prev) => {
+                        return [...prev, user]
+                    })
+                }
+            })
+    }, [])
+
+
     const Options = [
         "Sobre", "Ajuda", "Imprensa", "API", "Carreiras", "Privacidade", "Termos", "Localizações",
         "Idioma", "Meta Verified"
