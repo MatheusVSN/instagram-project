@@ -1,12 +1,13 @@
+import { faker } from '@faker-js/faker';
 import { useEffect, useState } from "react";
+
+
 
 import Image from "next/image";
 import UserRecomendationComponent from "../user/user-profile-recomended.jsx";
 
 
 const abortController = new AbortController()
-const abortFollowers = new AbortController()
-const abortRecommendation = new AbortController()
 
 function MiniButton({ Name }) {
     return (
@@ -16,6 +17,10 @@ function MiniButton({ Name }) {
 
 function getRandomNumberBetween(Min, Max) {
     return Math.floor(Math.random() * (Max - Min + 1) + Min)
+}
+
+function generateRandomNames() {
+    return [faker.name.firstName(), faker.name.firstName()]
 }
 
 const ReasonsList = [
@@ -41,11 +46,17 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
             })
             .then((data) => {
                 abortController.abort();
+                setRecommendation(() => {
+                    return []
+                })
                 for (let index = 0; index < data.results.length; index += 1) {
                     let userData = data.results[index];
                     let randomIndex = getRandomNumberBetween(0, 3);
                     let Reason = ReasonsList[randomIndex]
                     if (randomIndex == 1) {
+                        let namesArray = generateRandomNames();
+                        Reason = Reason.replace("%n", namesArray[0])
+                        Reason = Reason.replace("%n", namesArray[1])
                     }
                     let user = { name: userData.name.first, image: userData.picture.large, reason: Reason };
                     setRecommendation((prev) => {
