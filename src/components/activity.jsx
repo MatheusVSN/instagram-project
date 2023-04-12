@@ -2,9 +2,10 @@ import { faker } from '@faker-js/faker';
 import { useEffect, useState } from "react";
 
 import Feed from "../components/feed/feed";
-import imageExample from "../images/feed-images/image-example.jpg";
-
+import FeedOptions from "../components/feed/feed-options";
 import UserProfile from "./user/user-profile";
+
+import imageExample from "../images/feed-images/image-example.jpg";
 
 const abortController = new AbortController()
 const fetcher = (url) => fetch(url).then((response) => response.json());
@@ -37,15 +38,23 @@ export default function Activity() {
                 setUserList(() => {
                     return []
                 })
+                const updatedList = []
                 for (let index = 0; index < data.results.length; index += 1) {
                     let userData = data.results[index];
                     let user = { name: userData.name.first, image: userData.picture.large };
-                    setUserList((prev) => {
-                        return [...prev, user]
-                    })
+                    updatedList.push(user)
                 }
+                setUserList((prev) => {
+                    return [...prev, ...updatedList]
+                })
             })
     }, [])
+
+    const mouseButton1Click = () => {
+        let element = document.querySelectorAll('[id^="options"]')[0]
+        element.id = element.id == "options-false" ? "options-true" : "options-false"
+        console.log(element.id)
+    }
 
     return (
         <div className="mb-4 grid place-content-center">
@@ -59,12 +68,14 @@ export default function Activity() {
                 </ul>
             </div>
 
+            <FeedOptions Clicked={mouseButton1Click} />
+
             <div className="mt-4">
                 <h2 className="font-bold text-2xl mb-4">Feeds</h2>
                 <ul className="list-none space-y-6">
                     {ListOfUsers.map((index) => {
                         return (<li key={index}>
-                            <Feed User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: faker.lorem.lines(), ImageSource: faker.image.image(1280, 1280) || imageExample, Likes: getRandomNumber() }} />
+                            <Feed OnToggleOptions={mouseButton1Click} User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: faker.lorem.lines(), ImageSource: faker.image.image(1280, 1280) || imageExample, Likes: getRandomNumber() }} />
                         </li>)
                     })}
                 </ul>

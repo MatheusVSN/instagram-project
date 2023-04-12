@@ -9,7 +9,7 @@ import MessageIcon from "../../images/messages-icon.svg"
 import MoreIcon from "../../images/more-horizontal.svg"
 import SendIcon from "../../images/send-icon.svg"
 
-export default function Feed({ User, PostInformation }) {
+export default function Feed({ User, PostInformation, OnToggleOptions }) {
     const [like, setLike] = useState(0)
 
     function onLike() {
@@ -28,7 +28,7 @@ export default function Feed({ User, PostInformation }) {
                 </div>
 
                 <p className="font-bold">{User.Name}</p>
-                <Image className="rounded-full hover:cursor-pointer transition ml-auto hover:scale-150" src={MoreIcon} alt={"Mais opções"} />
+                <Image onClick={() => OnToggleOptions()} className="rounded-full hover:cursor-pointer transition ml-auto hover:scale-150" src={MoreIcon} alt={"Mais opções"} />
             </div>
 
             <Image src={PostInformation.ImageSource} width={1280} height={720} />
