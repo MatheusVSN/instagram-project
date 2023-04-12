@@ -4,6 +4,11 @@
 - Icons/Favicon:
   - https://icons8.com.br/
   - https://feathericons.com/
+  
+- API:
+  - https://randomuser.me/
+  - https://next.fakerjs.dev/
+ 
 
 ### Image Preview:
 ![Desktop](preview-image/first-version/1920x1080.png)
