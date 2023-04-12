@@ -17,16 +17,16 @@ import UserProfileStyle2 from "../components/user/user-profile-2.jsx"
 
 export default function SideBar() {
     const OptionContainer = [
-        { logo: InstagramIcon, name: "", isMobile: true },
-        { logo: HomeLogo, name: "Pagina Inicial", active: true, renderOnMobile: true },
-        { logo: SearchIcon, name: "Pesquisar", },
-        { logo: CompassIcon, name: "Explorar", renderOnMobile: true },
-        { logo: ReelsIcon, name: "Reels", renderOnMobile: true },
-        { logo: MessageIcon, name: "Mensagens", renderOnMobile: true },
-        { logo: HeartIcon, name: "Notificações", },
-        { logo: PlusIcon, name: "Criar", },
-        { logo: UserIcon, name: "Perfil", renderOnMobile: true, isProfile: true },
-        { logo: ListIcon, name: "Mais", bottom: true }
+        { imageSource: InstagramIcon, name: "", isMobile: true },
+        { imageSource: HomeLogo, name: "Pagina Inicial", isActive: true, renderOnMobile: true },
+        { imageSource: SearchIcon, name: "Pesquisar", },
+        { imageSource: CompassIcon, name: "Explorar", renderOnMobile: true },
+        { imageSource: ReelsIcon, name: "Reels", renderOnMobile: true },
+        { imageSource: MessageIcon, name: "Mensagens", renderOnMobile: true },
+        { imageSource: HeartIcon, name: "Notificações", },
+        { imageSource: PlusIcon, name: "Criar", },
+        { imageSource: UserIcon, name: "Perfil", renderOnMobile: true, isProfile: true },
+        { imageSource: ListIcon, name: "Mais", bottom: true }
     ]
 
     return (
@@ -38,7 +38,7 @@ export default function SideBar() {
                     {OptionContainer.map((index) => {
                         return (
                             <li key={index} className={index.bottom === true ? "mt-auto" : undefined}>
-                                <SideBarOption key={index} isProfile={index.isProfile} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
+                                <SideBarOption key={index} {...index} />
                             </li>
                         )
                     })}
@@ -72,7 +72,7 @@ export default function SideBar() {
 
                         return (
                             <li key={index}>
-                                <SideBarOption key={index} isProfile={index.isProfile} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
+                                <SideBarOption key={index} {...index} />
                             </li>
                         )
                     })}

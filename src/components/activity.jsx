@@ -56,7 +56,7 @@ export default function Activity() {
 
     return (
         <div className="mb-4 grid place-content-center">
-            <div className="mt-4 py-4 ml-1 overflow-auto overflow-y-hidden scrollbar-hide max-w-[571px] max-[375px]:mt-8">
+            <div className="mt-4 py-4 ml-1 overflow-auto overflow-y-hidden scrollbar-hide max-w-[571px] max-[450px]:mt-12">
                 <ul className="list-none flex space-x-6">
                     {ListOfUsers.map((index) => {
                         return (<li key={index}>
