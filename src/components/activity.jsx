@@ -53,7 +53,6 @@ export default function Activity() {
     const mouseButton1Click = () => {
         let element = document.querySelectorAll('[id^="options"]')[0]
         element.id = element.id == "options-false" ? "options-true" : "options-false"
-        console.log(element.id)
     }
 
     return (

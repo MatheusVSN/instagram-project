@@ -82,13 +82,13 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
                     </div>
                 </div>
 
-                <div className="flex items-center">
+                <div className="flex items-center w-[225px]">
                     <div className="mx-4">
-                        <p className="text-left text-xs font-bold">{Name}</p>
-                        <p className="text-left text-sm">{FullName}</p>
+                        <p className="text-left text-xs font-bold max-w-[75px]">{Name}</p>
+                        <p className="text-left text-sm max-w-[150px]">{FullName}</p>
                     </div>
 
-                    <p className="text-blue-500 text-center text-xs relative left-6 hover:cursor-pointer">Mudar</p>
+                    <p className="text-blue-500 text-center text-xs ml-auto hover:cursor-pointer">Mudar</p>
                 </div>
             </div>
 
