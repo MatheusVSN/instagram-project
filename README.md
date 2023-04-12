@@ -9,7 +9,7 @@
 ![Desktop](preview-image/first-version/1920x1080.png)
 
 ## Live Preview:
-proa-instagram-project.vercel.app
+https://proa-instagram-project.vercel.app/
 
 ### Built with:
 ![Next JS](https://img.shields.io/badge/Next.js-000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white)
