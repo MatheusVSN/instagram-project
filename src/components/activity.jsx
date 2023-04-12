@@ -8,7 +8,6 @@ import UserProfile from "./user/user-profile";
 import imageExample from "../images/feed-images/image-example.jpg";
 
 const abortController = new AbortController()
-const fetcher = (url) => fetch(url).then((response) => response.json());
 
 function getRandomNumber() {
     let Min = 1;

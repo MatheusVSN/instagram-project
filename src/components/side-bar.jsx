@@ -10,7 +10,7 @@ import MessageIcon from "../images/messages-icon.svg"
 import PlusIcon from "../images/plus-square-icon.svg"
 import ReelsIcon from "../images/reels-icon.svg"
 import SearchIcon from "../images/search-icon.svg"
-import UserIcon from "../images/user-icon.svg"
+import UserIcon from "../images/user/profile-picture.png"
 
 import SideBarOption from "../components/side-bar/option.jsx"
 import UserProfileStyle2 from "../components/user/user-profile-2.jsx"
@@ -25,7 +25,7 @@ export default function SideBar() {
         { logo: MessageIcon, name: "Mensagens", renderOnMobile: true },
         { logo: HeartIcon, name: "Notificações", },
         { logo: PlusIcon, name: "Criar", },
-        { logo: UserIcon, name: "Perfil", renderOnMobile: true },
+        { logo: UserIcon, name: "Perfil", renderOnMobile: true, isProfile: true },
         { logo: ListIcon, name: "Mais", bottom: true }
     ]
 
@@ -38,7 +38,7 @@ export default function SideBar() {
                     {OptionContainer.map((index) => {
                         return (
                             <li key={index} className={index.bottom === true ? "mt-auto" : undefined}>
-                                <SideBarOption key={index} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
+                                <SideBarOption key={index} isProfile={index.isProfile} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
                             </li>
                         )
                     })}

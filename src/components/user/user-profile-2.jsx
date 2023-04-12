@@ -78,7 +78,7 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
             <div className="flex items-center mt-8 mb-3">
                 <div className="p-0.5 bg-gray-100 rounded-full w-[56px]">
                     <div className="p-2 bg-white rounded-full">
-                        <Image src={ImageSource} alt={Name} width={45} height={45} />
+                        <Image className="rounded-full" src={ImageSource} alt={Name} width={45} height={45} />
                     </div>
                 </div>
 
