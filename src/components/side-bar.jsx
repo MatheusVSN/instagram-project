@@ -81,7 +81,7 @@ export default function SideBar() {
 
             {/* Top right side bar */}
             <div className="max-xl:hidden fixed right-0">
-                <UserProfileStyle2 ImageSource={UserIcon} Name="Usuário" FullName="Usuario Lorem Ipsum" />
+                <UserProfileStyle2 ImageSource={UserIcon} Name="Matheus" FullName="Matheus Vieira" />
             </div>
         </>
     )
