@@ -72,7 +72,7 @@ export default function SideBar() {
 
                         return (
                             <li key={index}>
-                                <SideBarOption key={index} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
+                                <SideBarOption key={index} isProfile={index.isProfile} imageSource={index.logo} name={index.name} isActive={index.active} isMobile={index.isMobile} />
                             </li>
                         )
                     })}
