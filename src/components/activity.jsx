@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker';
-import { useEffect, useState } from "react";
 
 import Feed from "../components/feed/feed";
 import FeedOptions from "../components/feed/feed-options";
@@ -7,7 +6,7 @@ import UserProfile from "./user/user-profile";
 
 import imageExample from "../images/feed-images/image-example.jpg";
 
-const abortController = new AbortController()
+import GenerateFollowers from "../components/hooks/generate-followers"
 
 function getRandomNumber() {
     let Min = 1;
@@ -17,37 +16,7 @@ function getRandomNumber() {
 }
 
 export default function Activity() {
-    const [ListOfUsers, setUserList] = useState([]);
-
-    useEffect(() => {
-        fetch("/api/user-generator", {
-            signal: abortController.signal,
-            method: "POST",
-            body: JSON.stringify({ ammount: 7 })
-        })
-            .then((response) => {
-                if (response.status == 200) {
-                    return response.json();
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .then((data) => {
-                abortController.abort();
-                setUserList(() => {
-                    return []
-                })
-                const updatedList = []
-                for (let index = 0; index < data.results.length; index += 1) {
-                    let userData = data.results[index];
-                    let user = { name: userData.name.first, image: userData.picture.large };
-                    updatedList.push(user)
-                }
-                setUserList((prev) => {
-                    return [...prev, ...updatedList]
-                })
-            })
-    }, [])
+    const ListOfUsers = GenerateFollowers();
 
     const mouseButton1Click = () => {
         let element = document.querySelectorAll('[id^="options"]')[0]
@@ -73,7 +42,10 @@ export default function Activity() {
                 <ul className="list-none space-y-6">
                     {ListOfUsers.map((index) => {
                         return (<li key={index}>
-                            <Feed OnToggleOptions={mouseButton1Click} User={{ Name: index.name, ImageSource: index.image }} PostInformation={{ Description: faker.lorem.lines(), ImageSource: faker.image.image(1280, 1280) || imageExample, Likes: getRandomNumber() }} />
+                            <Feed
+                                OnToggleOptions={mouseButton1Click}
+                                User={{ Name: index.name, ImageSource: index.image }}
+                                PostInformation={{ Description: faker.lorem.lines(), ImageSource: faker.image.image(1280, 1280) || imageExample, Likes: getRandomNumber() }} />
                         </li>)
                     })}
                 </ul>
