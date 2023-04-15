@@ -17,7 +17,7 @@ function GenerateProfilePicture({ ImageSource, Name }) {
     }
 
     return (
-        <div onClick={changeState} className="flex items-center w-full transition hover:bg-slate-200 hover:scale-105 hover:cursor-pointer">
+        <div onClick={changeState} className="flex items-center w-full transition rounded-lg hover:bg-slate-50 hover:scale-105 hover:cursor-pointer">
             <div className="rounded-full p-2">
                 <div className=" bg-white rounded-full w-full h-full">
                     <Image className="rounded-full w-[45px] h-[45px]" src={ImageSource} alt={Name} width={45} height={45} />
