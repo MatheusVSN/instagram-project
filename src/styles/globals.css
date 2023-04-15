@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-#options-false {
+#options-false, #commentary-false {
   display: none;
 }
 
@@ -10,3 +10,8 @@
   display: grid;
   place-content: center;
 }
+
+#commentary-true {
+  display: block;
+}
+
