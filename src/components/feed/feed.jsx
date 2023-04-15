@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 import Image from "next/image"
 
@@ -70,7 +71,7 @@ function CommentaryComponents({ Clicked, ToggleOptions, PostOwner, CommentariesL
                     </div>
 
                     <div className="w-[500px] h-[600px] max-lg:w-full">
-                        <Image className="object-cover w-full h-full" src={PostOwner.ImageSource} width={1280} height={720} />
+                        <Image className="object-cover w-full h-full" src={PostOwner.ImageSource} alt={"Imagem da publicação"} width={1280} height={720} />
                     </div>
                     <div className="flex flex-col bg-white w-[500px] lg:h-[600px] max-lg:w-full">
 
@@ -80,10 +81,10 @@ function CommentaryComponents({ Clicked, ToggleOptions, PostOwner, CommentariesL
                         </div>
                         {/* Commentaries */}
                         <ul className="list-none flex flex-col overflow-y-auto max-lg:hidden">
-                            <li><CommentaryComponent ImageSource={PostOwner.ProfilePicture} Name={PostOwner.Name} Description={PostOwner.Text} /></li>
+                            <li key={uuidv4()}><CommentaryComponent ImageSource={PostOwner.ProfilePicture} Name={PostOwner.Name} Description={PostOwner.Text} /></li>
                             {CommentariesList.map((index) => {
                                 return (
-                                    <li>
+                                    <li key={uuidv4()}>
                                         <CommentaryComponent ImageSource={index.ImageSource} Name={index.Name} Description={index.Text} />
                                     </li>
                                 )
@@ -169,7 +170,7 @@ export default function Feed({ User, PostInformation, OnToggleOptions }) {
                     <Image onClick={() => OnToggleOptions()} className={`rounded-full hover:cursor-pointer transition ml-auto ${!isTouchDevice() && "hover:scale-150"}`} src={MoreIcon} alt={"Mais opções"} />
                 </div>
 
-                <Image src={PostInformation.ImageSource} width={1280} height={720} />
+                <Image src={PostInformation.ImageSource} alt={"Imagem da Publicação"} width={1280} height={720} />
 
                 <div className="flex items-center gap-4 p-2 w-full mb-1.5 transition hover:cursor-pointer">
                     <Image className={`transition ${!isTouchDevice() && "hover:scale-150"} ${active && "hidden"}`} src={like == 0 ? HeartIcon : LikeHeartIcon} alt="Gostar" width={24} onClick={onLike} />

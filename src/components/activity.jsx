@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { useContext, useState, useCallback } from "react"
+import { v4 as uuidv4 } from 'uuid';
 
 import Feed from "../components/feed/feed";
 import FeedOptions from "../components/feed/feed-options";
@@ -61,7 +62,7 @@ function FeedComponent({ ListOfUsers, ToggleOptions }) {
                     let LikesQuantity = getRandomNumber()
                     let PostImage = faker.image.image(1280, 1280)
 
-                    return (<li key={index}>
+                    return (<li key={uuidv4()}>
                         <Feed
                             OnToggleOptions={() => ToggleOptions()}
                             User={{ Name: index.name, ImageSource: index.image }}
@@ -91,7 +92,7 @@ function FollowersComponent({ ListOfUsers }) {
         <div className="mt-4 py-4 ml-1 overflow-auto overflow-y-hidden scrollbar-hide max-w-[571px] max-[450px]:mt-12">
             <ul className="list-none flex space-x-6">
                 {ListOfUsers.map((index) => {
-                    return (<li key={index}>
+                    return (<li key={uuidv4()}>
                         <UserProfile Name={index.name} ImageSource={index.image} />
                     </li>)
                 })}

@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid"
 
 
 
@@ -99,7 +100,7 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
 
             <ul className="list-none mb-3">
                 {RecommendationUsers.map((index) => {
-                    return (<li key={index}>
+                    return (<li key={uuidv4()}>
                         <UserRecomendationComponent ImageSource={index.image} Name={index.name} Reason={index.reason} />
                     </li>)
                 })}
@@ -107,7 +108,7 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
 
             <ul className="list-disc max-w-[280px] mb-3">
                 {Options.map((index) => {
-                    return (<li key={index} className="inline-flex items-center align-baseline before:content-['\00B7'] before:mx-1">
+                    return (<li key={uuidv4()} className="inline-flex items-center align-baseline before:content-['\00B7'] before:mx-1">
                         <MiniButton Name={index} />
                     </li>)
                 })}

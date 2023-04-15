@@ -55,7 +55,7 @@ export default function Commentary({ UsersList, Clicked, ToggleOptions, PostOwne
             <div id="commentary-false" className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
                 <div className="flex">
                     <div className="w-[500px] h-[600px]">
-                        <Image className="object-cover w-full h-full" src={PostOwner.ImageSource} width={1280} height={720} />
+                        <Image className="object-cover w-full h-full" src={PostOwner.ImageSource} alt={"Publicação"} width={1280} height={720} />
                     </div>
                     <div className="flex flex-col bg-white w-[500px] h-[600px]">
                         {/* Owner */}

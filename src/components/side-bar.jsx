@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { v4 as uuidv4 } from 'uuid';
 
 import CompassIcon from "../images/compass-icon.svg"
 import HeartIcon from "../images/heart-icon.svg"
@@ -37,8 +38,8 @@ export default function SideBar() {
                 <ul className="list-none w-full">
                     {OptionContainer.map((index) => {
                         return (
-                            <li key={index} className={index.bottom === true ? "mt-auto" : undefined}>
-                                <SideBarOption key={index} {...index} />
+                            <li key={uuidv4()} className={index.bottom === true ? "mt-auto" : undefined}>
+                                <SideBarOption {...index} />
                             </li>
                         )
                     })}
@@ -71,8 +72,8 @@ export default function SideBar() {
                         if (!index.renderOnMobile) return
 
                         return (
-                            <li key={index}>
-                                <SideBarOption key={index} {...index} />
+                            <li key={uuidv4()}>
+                                <SideBarOption {...index} />
                             </li>
                         )
                     })}
