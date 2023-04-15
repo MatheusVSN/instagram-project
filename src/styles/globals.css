@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-#options-false, #commentary-false {
+#options-false,
+#commentary-false,
+#share-false {
   display: none;
 }
 
@@ -11,7 +13,7 @@
   place-content: center;
 }
 
-#commentary-true {
+#commentary-true,
+#share-true {
   display: block;
 }
-

@@ -64,7 +64,7 @@ function CommentaryComponents({ Clicked, ToggleOptions, PostOwner, CommentariesL
     return (
         <>
             <div onClick={() => Clicked()} id={`commentary-${ActiveState}`} className="w-screen h-screen fixed top-0 left-0 bg-black bg-opacity-50"></div>
-            <div id={`commentary-${ActiveState}`} className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+            <div id={`commentary-${ActiveState}`} className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20">
                 <div className="flex max-lg:flex-col max-lg:overflow-auto max-lg:h-[500px] max-lg:w-[700px] max-md:w-[500px] max-[500px]:w-screen">
                     <div className="bg-white flex items-center border-b lg:hidden">
                         <GenerateProfilePicture MoreOptionOnClick={() => ToggleOptions()} ImageSource={PostOwner.ProfilePicture} Name={PostOwner.Name} />
@@ -95,7 +95,7 @@ function CommentaryComponents({ Clicked, ToggleOptions, PostOwner, CommentariesL
                             <div className="flex items-center gap-4 p-2 w-full mb-1.5 transition hover:cursor-pointer">
                                 <Image onClick={() => ChangeLikeState()} className={`transition ${!isTouchDevice() && "hover:scale-150"}`} src={LikeState == 0 ? HeartIcon : LikeHeartIcon} alt="Gostar" width={24} />
                                 <Image className={`transition ${!isTouchDevice() && "hover:scale-150"}`} src={MessageIcon} alt="Comentar" />
-                                <Image className={`transition ${!isTouchDevice() && "hover:scale-150"}`} src={SendIcon} alt="Compartilhar" />
+                                <Image onClick={() => ToggleVisibility("share")} className={`transition ${!isTouchDevice() && "hover:scale-150"}`} src={SendIcon} alt="Compartilhar" />
                                 <Image className={`transition ${!isTouchDevice() && "hover:scale-150"} ml-auto`} src={Bookmark} alt="Bookmark" />
                             </div>
 
@@ -175,7 +175,7 @@ export default function Feed({ User, PostInformation, OnToggleOptions }) {
                 <div className="flex items-center gap-4 p-2 w-full mb-1.5 transition hover:cursor-pointer">
                     <Image className={`transition ${!isTouchDevice() && "hover:scale-150"} ${active && "hidden"}`} src={like == 0 ? HeartIcon : LikeHeartIcon} alt="Gostar" width={24} onClick={onLike} />
                     <Image onClick={() => SetPostInformation()} className={`transition ${!isTouchDevice() && "hover:scale-150"} ${active && "hidden"}`} src={MessageIcon} alt="Comentar" />
-                    <Image className={`transition ${!isTouchDevice() && "hover:scale-150"} ${active && "hidden"}`} src={SendIcon} alt="Compartilhar" />
+                    <Image onClick={() => ToggleVisibility("share")} className={`transition ${!isTouchDevice() && "hover:scale-150"} ${active && "hidden"}`} src={SendIcon} alt="Compartilhar" />
                     <Image className={`transition ${!isTouchDevice() && "hover:scale-150"} ml-auto ${active && "hidden"}`} src={Bookmark} alt="Bookmark" />
                 </div>
 

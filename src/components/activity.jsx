@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Feed from "../components/feed/feed";
 import FeedOptions from "../components/feed/feed-options";
 import UserProfile from "./user/user-profile";
+import SharePost from "./share/share-post"
 
 import GenerateFollowers from "../components/hooks/generate-followers"
 
@@ -108,6 +109,7 @@ export default function Activity() {
         <div className="mb-4 grid place-content-center">
             <FollowersComponent ListOfUsers={FollowersList} />
             <FeedOptions Clicked={() => ToggleVisibility("options")} />
+            <SharePost UserList={FollowersList} Clicked={() => ToggleVisibility("share")} />
             <FeedComponent
                 ListOfUsers={FollowersList}
                 ToggleOptions={() => ToggleVisibility("options")}
