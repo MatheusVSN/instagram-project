@@ -90,7 +90,7 @@ function FeedComponent({ ListOfUsers, ToggleOptions }) {
 
 function FollowersComponent({ ListOfUsers }) {
     return (
-        <div className="mt-4 py-4 ml-1 overflow-hidden max-w-[571px] max-[450px]:mt-12">
+        <div className="mt-4 py-4 ml-1 overflow-x-auto max-w-[571px] max-[450px]:mt-12">
             <ul className="list-none flex space-x-6">
                 {ListOfUsers.map((index) => {
                     return (<li key={uuidv4()}>
