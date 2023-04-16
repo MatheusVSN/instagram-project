@@ -9,6 +9,9 @@ import SharePost from "./share/share-post"
 
 import GenerateFollowers from "../components/hooks/generate-followers"
 
+import LoadingUserProfile from "./loading/user/loading-user-profile"
+import LoadingFeedComponent from "./loading/feed/loading-feed"
+
 function getRandomNumber() {
     let Min = 1;
     let Max = 500;
@@ -102,18 +105,56 @@ function FollowersComponent({ ListOfUsers }) {
     )
 }
 
+function LoadingFollowers() {
+    return (
+        <div className="mt-4 py-4 ml-1 max-w-[571px] max-[450px]:mt-12 overflow-hidden">
+            <ul className="list-none flex space-x-6">
+                {[...Array(7).keys()].map((index) => {
+                    return (<li key={uuidv4()}>
+                        <LoadingUserProfile />
+                    </li>)
+                })}
+            </ul>
+        </div>
+    )
+}
+
+function LoadingFeed() {
+    return (
+        <div className="mt-4">
+            <h2 className="font-bold text-2xl mb-4">Feeds</h2>
+            <ul className="list-none space-y-6">
+                {[...Array(7).keys()].map((index) => {
+                    return (<li key={uuidv4()}>
+                        <LoadingFeedComponent />
+                    </li>)
+                })}
+            </ul>
+        </div>
+    )
+}
+
 export default function Activity() {
-    const FollowersList = GenerateFollowers();
+    const [FollowersList, LoadingState] = GenerateFollowers();
 
     return (
         <div className="mb-4 grid place-content-center">
-            <FollowersComponent ListOfUsers={FollowersList} />
+            {LoadingState ?
+                <>
+                    <LoadingFollowers />
+                    <LoadingFeed />
+                </>
+                :
+                <>
+                    <FollowersComponent ListOfUsers={FollowersList} />
+                    <FeedComponent
+                        ListOfUsers={FollowersList}
+                        ToggleOptions={() => ToggleVisibility("options")}
+                    />
+                </>
+            }
             <FeedOptions Clicked={() => ToggleVisibility("options")} />
             <SharePost UserList={FollowersList} Clicked={() => ToggleVisibility("share")} />
-            <FeedComponent
-                ListOfUsers={FollowersList}
-                ToggleOptions={() => ToggleVisibility("options")}
-            />
             <div className="mb-16"></div>
         </div>
     )

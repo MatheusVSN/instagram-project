@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
+const abortController = new AbortController()
 
 export default function GenerateFollowers() {
     const [ListOfUsers, setUserList] = useState([]);
+    const [loadingState, setLoadingState] = useState(true);
 
     useEffect(() => {
-        const abortController = new AbortController()
 
         fetch("/api/user-generator", {
             signal: abortController.signal,
@@ -32,8 +33,9 @@ export default function GenerateFollowers() {
                 setUserList((prev) => {
                     return [...prev, ...updatedList]
                 })
+                setLoadingState(false)
             })
     }, [])
 
-    return ListOfUsers
+    return [ListOfUsers, loadingState]
 }

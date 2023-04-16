@@ -1,14 +1,10 @@
-import { faker } from '@faker-js/faker';
-import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid"
-
-
-
 import Image from "next/image";
-import UserRecomendationComponent from "../user/user-profile-recomended.jsx";
 
+import UserRecomendationComponent from "../user/user-profile-recomended";
+import GenerateRecommendedFollowers from '../hooks/generate-recommended-followers';
 
-const abortController = new AbortController()
+import RightSideBar from "../loading/right-side/bar"
 
 function MiniButton({ Name }) {
     return (
@@ -16,57 +12,8 @@ function MiniButton({ Name }) {
     )
 }
 
-function getRandomNumberBetween(Min, Max) {
-    return Math.floor(Math.random() * (Max - Min + 1) + Min)
-}
-
-function generateRandomNames() {
-    return [faker.name.firstName(), faker.name.firstName()]
-}
-
-const ReasonsList = [
-    "Novo(a) no Instagram", "Seguido(a) por %n e %n", "Sugestões para você", "Segue você"
-]
-
 export default function UserProfile({ ImageSource, Name, FullName }) {
-    const [RecommendationUsers, setRecommendation] = useState([])
-
-
-    useEffect(() => {
-        fetch("/api/user-generator", {
-            signal: abortController.signal,
-            method: "POST",
-            body: JSON.stringify({ ammount: 5 })
-        })
-            .then((response) => {
-                if (response.status == 200) {
-                    return response.json()
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .then((data) => {
-                abortController.abort();
-                setRecommendation(() => {
-                    return []
-                })
-                for (let index = 0; index < data.results.length; index += 1) {
-                    let userData = data.results[index];
-                    let randomIndex = getRandomNumberBetween(0, 3);
-                    let Reason = ReasonsList[randomIndex]
-                    if (randomIndex == 1) {
-                        let namesArray = generateRandomNames();
-                        Reason = Reason.replace("%n", namesArray[0])
-                        Reason = Reason.replace("%n", namesArray[1])
-                    }
-                    let user = { name: userData.name.first, image: userData.picture.large, reason: Reason };
-                    setRecommendation((prev) => {
-                        return [...prev, user]
-                    })
-                }
-            })
-    }, [])
-
+    const [RecommendationUsers, loadingState] = GenerateRecommendedFollowers()
 
     const Options = [
         "Sobre", "Ajuda", "Imprensa", "API", "Carreiras", "Privacidade", "Termos", "Localizações",
@@ -75,46 +22,49 @@ export default function UserProfile({ ImageSource, Name, FullName }) {
 
 
     return (
-        <div className="mr-6">
-            <div className="flex items-center mt-8 mb-3">
-                <div className="p-0.5 bg-gray-100 rounded-full w-[56px]">
-                    <div className="p-2 bg-white rounded-full">
-                        <Image className="rounded-full" src={ImageSource} alt={Name} width={45} height={45} />
+        <>
+            {loadingState ? <RightSideBar /> :
+                <div className="mr-6">
+                    <div className="flex items-center mt-8 mb-3">
+                        <div className="p-0.5 bg-gray-100 rounded-full w-[56px]">
+                            <div className="p-2 bg-white rounded-full">
+                                <Image className="rounded-full" src={ImageSource} alt={Name} width={45} height={45} />
+                            </div>
+                        </div>
+
+                        <div className="flex items-center w-[225px]">
+                            <div className="mx-4">
+                                <p className="text-left text-xs font-bold max-w-[75px]">{Name}</p>
+                                <p className="text-left text-sm max-w-[150px]">{FullName}</p>
+                            </div>
+
+                            <p className="text-blue-500 text-center text-xs ml-auto hover:cursor-pointer">Mudar</p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="flex items-center w-[225px]">
-                    <div className="mx-4">
-                        <p className="text-left text-xs font-bold max-w-[75px]">{Name}</p>
-                        <p className="text-left text-sm max-w-[150px]">{FullName}</p>
+                    <div className="flex items-center mb-3">
+                        <p className="font-semibold text-sm text-gray-500">Sugestões para você</p>
+                        <p className="font-semibold text-xs ml-auto hover:text-gray-500 hover:cursor-pointer">Ver tudo</p>
                     </div>
 
-                    <p className="text-blue-500 text-center text-xs ml-auto hover:cursor-pointer">Mudar</p>
-                </div>
-            </div>
+                    <ul className="list-none mb-3">
+                        {RecommendationUsers.map((index) => {
+                            return (<li key={uuidv4()}>
+                                <UserRecomendationComponent ImageSource={index.image} Name={index.name} Reason={index.reason} />
+                            </li>)
+                        })}
+                    </ul>
 
-            <div className="flex items-center mb-3">
-                <p className="font-semibold text-sm text-gray-500">Sugestões para você</p>
-                <p className="font-semibold text-xs ml-auto hover:text-gray-500 hover:cursor-pointer">Ver tudo</p>
-            </div>
+                    <ul className="list-disc max-w-[280px] mb-3">
+                        {Options.map((index) => {
+                            return (<li key={uuidv4()} className="inline-flex items-center align-baseline before:content-['\00B7'] before:mx-1">
+                                <MiniButton Name={index} />
+                            </li>)
+                        })}
+                    </ul>
 
-            <ul className="list-none mb-3">
-                {RecommendationUsers.map((index) => {
-                    return (<li key={uuidv4()}>
-                        <UserRecomendationComponent ImageSource={index.image} Name={index.name} Reason={index.reason} />
-                    </li>)
-                })}
-            </ul>
-
-            <ul className="list-disc max-w-[280px] mb-3">
-                {Options.map((index) => {
-                    return (<li key={uuidv4()} className="inline-flex items-center align-baseline before:content-['\00B7'] before:mx-1">
-                        <MiniButton Name={index} />
-                    </li>)
-                })}
-            </ul>
-
-            <p className="text-gray-500 text-xs">© 2023 INSTAGRAM FROM META</p>
-        </div>
+                    <p className="text-gray-500 text-xs">© 2023 INSTAGRAM FROM META</p>
+                </div>}
+        </>
     )
 }
