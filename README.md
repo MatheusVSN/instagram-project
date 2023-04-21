@@ -10,9 +10,6 @@
   - https://next.fakerjs.dev/
  
 
-### Image Preview:
-![Desktop](preview-image/first-version/1920x1080.png)
-
 ## Live Preview:
 https://proa-instagram-project.vercel.app/
 
